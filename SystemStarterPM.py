@@ -15,11 +15,10 @@ class PlantMonitor:
 
     def take_oneshot(self):
         logging.debug("Taking one shot.")
-        image = self.cam_connector.getImage()
         filename = datetime.now().strftime("%Y%m%d_%H%M%S") + '.jpg'
         path = os.path.join(self.images_folder, filename)
         logging.debug("Saving image to %s" % path)
-        image.save(path)
+        self.cam_connector.saveCamImage(path)
 
 
 def read_Settings(settings_path):

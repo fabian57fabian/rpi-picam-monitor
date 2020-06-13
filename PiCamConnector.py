@@ -1,4 +1,5 @@
 import os
+import io
 import time
 from picamera import PiCamera
 import logging
@@ -19,7 +20,12 @@ class PiCamConnector():
         self.camera.stop_preview()
 
     def getCamImage(self):
-        # TODO get image
+        # Create the in-memory stream
+        stream = io.BytesIO()
         self.camera.start_preview()
-        time.sleep(.2)
-        self.camera.stop_preview()
+        time.sleep(2)
+        self.camera.capture(stream, format='jpeg')
+        # "Rewind" the stream to the beginning so we can read its content
+        stream.seek(0)
+        # P.S. better to convert it into PIL image with PIL.Image.open(stream)
+        return stream
