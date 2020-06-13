@@ -46,5 +46,7 @@ if __name__ == '__main__':
     logging.info("Starting continous timer with interval %d" % interval)
     timer.start()
     print("System Started. Working...")
+    # And now doing the first iterazione (instead of waiting for [interval]
+    monitorer.take_oneshot()
     while True:
         time.sleep(10)
