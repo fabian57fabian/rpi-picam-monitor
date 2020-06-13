@@ -41,6 +41,7 @@ if __name__ == '__main__':
         os.makedirs(images_folder)
     cam_connector = PiCamConnector()
     cam_connector.setResolution(res[0], res[1])
+    cam_connector.setRotation(settings['rotation'])
     monitorer = PlantMonitor(cam_connector)
     monitorer.images_folder = images_folder
     timer = RepeatingTimer(monitorer.take_oneshot, interval)

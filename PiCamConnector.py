@@ -10,6 +10,9 @@ class PiCamConnector():
         logging.info("Creating Pi Cam Connector")
         self.camera = PiCamera()
 
+    def setRotation(self, rotation: int):
+        self.camera.rotation = rotation
+
     def setResolution(self, x: int, y: int):
         logging.debug("Resolution changed to (%d, %d)" % (x, y))
         self.camera.resolution = (x, y)

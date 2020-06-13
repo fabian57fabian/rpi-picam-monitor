@@ -2,5 +2,6 @@
   "debug": true,
   "interval": 60,
   "images_folder": "images",
-  "resolution": [2592, 1944]
+  "resolution": [1080, 1920],
+  "rotation": 90
 }
