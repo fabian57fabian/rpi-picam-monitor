@@ -33,8 +33,11 @@ if __name__ == '__main__':
     settings = read_Settings('settings.json')
     debug, interval, images_folder, res = settings['debug'], settings['interval'], settings['images_folder'], settings[
         'resolution']
-    logging.info("Settings file readed: {}".format(settings))
-    logging.basicConfig(filename='all_logs.log', level=logging.DEBUG if debug else logging.INFO)
+    print("Settings file readed: {}".format(settings))
+    logging_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'all_logs.log')
+    logging.basicConfig(filename=logging_file, level=logging.DEBUG if debug else logging.INFO,
+                        format="%(asctime)s:%(levelname)s:%(message)s")
+    print("Logging will be visible in file %s" % logging_file)
     cam_connector = PiCamConnector()
     cam_connector.setResolution(res[0], res[1])
     monitorer = PlantMonitor(cam_connector)
@@ -42,5 +45,6 @@ if __name__ == '__main__':
     timer = RepeatingTimer(monitorer.take_oneshot, interval)
     logging.info("Starting continous timer with interval %d" % interval)
     timer.start()
+    print("System Started. Working...")
     while True:
         time.sleep(10)
