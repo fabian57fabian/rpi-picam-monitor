@@ -1,13 +1,16 @@
 import os
+import time
 from picamera import PiCamera
+import logging
 
 
 class PiCamConnector():
-    def __init__(self, debug=False):
-        self.debug = debug
+    def __init__(self):
+        logging.info("Creating Pi Cam Connector")
         self.camera = PiCamera()
 
     def setResolution(self, x: int, y: int):
+        logging.debug("Resolution changed to (%d, %d)" % (x, y))
         self.camera.resolution = (x, y)
 
     def saveCamImage(self, filename: str):
