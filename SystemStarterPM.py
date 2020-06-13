@@ -37,6 +37,8 @@ if __name__ == '__main__':
     logging.basicConfig(filename=logging_file, level=logging.DEBUG if debug else logging.INFO,
                         format="%(asctime)s:%(levelname)s:%(message)s")
     print("Logging will be visible in file %s" % logging_file)
+    if not os.path.exists(images_folder):
+        os.makedirs(images_folder)
     cam_connector = PiCamConnector()
     cam_connector.setResolution(res[0], res[1])
     monitorer = PlantMonitor(cam_connector)
